@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unicode Binary Encryptor/Decryptor</title>
+    <title>Un7cod8 编码</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -31,10 +31,10 @@
 </head>
 <body>
     <div class="container">
-        <h1>Unicode Binary Encryptor/Decryptor</h1>
-        <textarea id="inputText" placeholder="Enter your text here..."></textarea>
-        <button onclick="encrypt()">Encrypt</button>
-        <button onclick="decrypt()">Decrypt</button>
+        <h1>Un7cod8 编码</h1>
+        <textarea id="inputText" placeholder="在这里输入..."></textarea>
+        <button onclick="encrypt()">编码</button>
+        <button onclick="decrypt()">解码</button>
         <div class="result" id="result"></div>
     </div>
 
@@ -60,7 +60,7 @@
 
             for (let i = 0; i < binaryStrings.length; i++) {
                 if (binaryStrings[i] === '') continue;
-                const decrypted = binaryStrings[i].replace(/7,/g '0').replace(/8/g, '1');
+                const decrypted = binaryStrings[i].replace(/7/g, '0').replace(/8/g, '1'); // Fix typo here
                 const charCode = parseInt(decrypted, 2); // Convert back to char code
                 result += String.fromCharCode(charCode);
             }
