@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unicode Binary Encryptor/Decryptor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            margin-bottom: 10px;
+        }
+        button {
+            margin-right: 10px;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Unicode Binary Encryptor/Decryptor</h1>
+        <textarea id="inputText" placeholder="Enter your text here..."></textarea>
+        <button onclick="encrypt()">Encrypt</button>
+        <button onclick="decrypt()">Decrypt</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function encrypt() {
+            const input = document.getElementById('inputText').value;
+            let result = '';
+
+            for (let i = 0; i < input.length; i++) {
+                const charCode = input.charCodeAt(i);
+                const binary = charCode.toString(2); // Convert to binary
+                const encrypted = binary.replace(/0/g, '7').replace(/1/g, '8');
+                result += encrypted + ' '; // Add space for separation
+            }
+
+            document.getElementById('result').innerText = result.trim();
+        }
+
+        function decrypt() {
+            const input = document.getElementById('inputText').value;
+            const binaryStrings = input.split(' '); // Split by space
+            let result = '';
+
+            for (let i = 0; i < binaryStrings.length; i++) {
+                if (binaryStrings[i] === '') continue;
+                const decrypted = binaryStrings[i].replace(/7,/g '0').replace(/8/g, '1');
+                const charCode = parseInt(decrypted, 2); // Convert back to char code
+                result += String.fromCharCode(charCode);
+            }
+
+            document.getElementById('result').innerText = result;
+        }
+    </script>
+</body>
+</html>
