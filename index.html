@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Un7cod8 编码</title>
+    <title>Uni7cod8</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -27,27 +27,63 @@
             background-color: #f9f9f9;
             border: 1px solid #ddd;
         }
+        .language-select {
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Un7cod8 编码</h1>
-        <textarea id="inputText" placeholder="在这里输入..."></textarea>
-        <button onclick="encrypt()">编码</button>
-        <button onclick="decrypt()">解码</button>
+        <div class="language-select">
+            <label for="language">Language / 语言：</label>
+            <select id="language" onchange="changeLanguage()">
+                <option value="en">English</option>
+                <option value="zh">中文</option>
+            </select>
+        </div>
+        <h1 id="title">Uni7cod8</h1>
+        <textarea id="inputText" placeholder="Enter your text here... / 在这里输入文本..."></textarea>
+        <button onclick="encrypt()" id="encryptButton">Encode</button>
+        <button onclick="decrypt()" id="decryptButton">Decode</button>
         <div class="result" id="result"></div>
     </div>
 
     <script>
+        let language = 'en';
+
+        function changeLanguage() {
+            language = document.getElementById('language').value;
+            updateText();
+        }
+
+        function updateText() {
+            const title = document.getElementById('title');
+            const encryptButton = document.getElementById('encryptButton');
+            const decryptButton = document.getElementById('decryptButton');
+            const placeholder = document.getElementById('inputText');
+
+            if (language === 'en') {
+                title.innerText = 'Uni7cod8';
+                encryptButton.innerText = 'Encode';
+                decryptButton.innerText = 'Decode';
+                placeholder.placeholder = 'Enter your text here...';
+            } else if (language === 'zh') {
+                title.innerText = 'Uni7cod8 编码';
+                encryptButton.innerText = '编码';
+                decryptButton.innerText = '解码';
+                placeholder.placeholder = '在这里输入文本...';
+            }
+        }
+
         function encrypt() {
             const input = document.getElementById('inputText').value;
             let result = '';
 
             for (let i = 0; i < input.length; i++) {
                 const charCode = input.charCodeAt(i);
-                const binary = charCode.toString(2); // Convert to binary
+                const binary = charCode.toString(2);
                 const encrypted = binary.replace(/0/g, '7').replace(/1/g, '8');
-                result += encrypted + ' '; // Add space for separation
+                result += encrypted + ' ';
             }
 
             document.getElementById('result').innerText = result.trim();
@@ -55,18 +91,20 @@
 
         function decrypt() {
             const input = document.getElementById('inputText').value;
-            const binaryStrings = input.split(' '); // Split by space
             let result = '';
 
+            const binaryStrings = input.split(' ');
             for (let i = 0; i < binaryStrings.length; i++) {
                 if (binaryStrings[i] === '') continue;
-                const decrypted = binaryStrings[i].replace(/7/g, '0').replace(/8/g, '1'); // Fix typo here
-                const charCode = parseInt(decrypted, 2); // Convert back to char code
+                const decrypted = binaryStrings[i].replace(/7/g, '0').replace(/8/g, '1');
+                const charCode = parseInt(decrypted, 2);
                 result += String.fromCharCode(charCode);
             }
 
             document.getElementById('result').innerText = result;
         }
+
+        updateText();
     </script>
 </body>
 </html>
