@@ -41,7 +41,7 @@
                 <option value="zh">中文</option>
             </select>
         </div>
-        <h1 id="title">Uni7cod8</h1>
+        <h1 id="title">Un7cod8</h1>
         <textarea id="inputText" placeholder="Enter your text here... / 在这里输入文本..."></textarea>
         <button onclick="encrypt()" id="encryptButton">Encode</button>
         <button onclick="decrypt()" id="decryptButton">Decode</button>
@@ -63,12 +63,12 @@
             const placeholder = document.getElementById('inputText');
 
             if (language === 'en') {
-                title.innerText = 'Uni7cod8';
+                title.innerText = 'Un7cod8';
                 encryptButton.innerText = 'Encode';
                 decryptButton.innerText = 'Decode';
                 placeholder.placeholder = 'Enter your text here...';
             } else if (language === 'zh') {
-                title.innerText = 'Uni7cod8 编码';
+                title.innerText = 'Un7cod8';
                 encryptButton.innerText = '编码';
                 decryptButton.innerText = '解码';
                 placeholder.placeholder = '在这里输入文本...';
