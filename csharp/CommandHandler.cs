@@ -74,7 +74,11 @@ namespace un7cod8
                     Argument stringArg = args.Find(x => x.pattern == "S");
                     if (stringArg != null)
                     {
-                        Console.WriteLine("解码结果: " + Program.Decode(stringArg.value));
+                        string decodedString = Program.Decode(stringArg.value);
+                        if (decodedString != "")
+                        {
+                            Console.WriteLine("解码结果: " + decodedString);
+                        }
                     }
                     else
                     {

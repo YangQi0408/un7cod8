@@ -110,7 +110,14 @@ namespace un7cod8
             //处理解码
             foreach(string bin in charsInBin)
             {
-                result += (char)Convert.ToInt32(bin,2);
+                try
+                {
+                    result += (char)Convert.ToInt32(bin, 2);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("解码失败: " + ex.Message);
+                }
                 /*
                 byte[] bytes = new byte[2];
 
