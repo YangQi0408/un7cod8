@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Text;
 
 namespace un7cod8
@@ -50,6 +51,7 @@ namespace un7cod8
             //处理字符
             foreach (char c in chars)
             {
+                /*
                 //获取每个字符的unicode对应的byte
                 byte[] bytes = Encoding.Unicode.GetBytes(c.ToString());
                 //固定byte编码
@@ -84,6 +86,11 @@ namespace un7cod8
                 //拼合文本
                 result += temp;
                 //Console.WriteLine(((byte)c).ToString("X4"));
+                */
+                int unicode = c;
+                //Console.WriteLine(unicode);
+                string temp = Convert.ToString(unicode, 2).Replace("0", "7").Replace("1", "8");
+                result += temp + " ";
             }
             return result;
         }
