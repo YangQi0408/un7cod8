@@ -62,8 +62,27 @@ namespace un7cod8
                     string binaryStr2 = Convert.ToString(bytes[1], 2);
                     encodedStr2 = binaryStr2.Replace("0", "7").Replace("1", "8");
                 }
+                //由于转换的时候得到了两个bytes,所以要看情况填补0来恢复原数据
+                string temp = bytes[1] == 0 ? encodedStr1 + " " : encodedStr2 + "x" + encodedStr1 + " ";
+                if(temp.Length - 2 <= 15 && bytes[1] != 0)
+                {
+                    int fixes = 15 - (temp.Length - 2);
+                    if (fixes == 0)
+                    {
+                        temp = temp.Replace("x", "7");
+                    }
+                    else
+                    {
+                        string replaceStr = "";
+                        for(int i = 0; i < fixes; i++)
+                        {
+                            replaceStr += "7";
+                        }
+                        temp = temp.Replace("x", replaceStr);
+                    }
+                }
                 //拼合文本
-                result += bytes[1] == 0 ? encodedStr1 + " " : encodedStr2 + "x" + encodedStr1 + " ";
+                result += temp;
                 //Console.WriteLine(((byte)c).ToString("X4"));
             }
             return result;
@@ -84,6 +103,8 @@ namespace un7cod8
             //处理解码
             foreach(string bin in charsInBin)
             {
+                result += (char)Convert.ToInt32(bin,2);
+                /*
                 byte[] bytes = new byte[2];
 
                 //当字符量大于9时视作两个byte代表的字符
@@ -102,6 +123,7 @@ namespace un7cod8
                 }
                 //unicode解码与拼合
                 result += Encoding.Unicode.GetString(bytes);
+                */
             }
             return result;
         }
